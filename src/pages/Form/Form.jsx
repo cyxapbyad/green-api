@@ -26,13 +26,9 @@ const FormEl = () => {
   const { getSettings, getStateInstance, sendMessage, sendFileByUrl, contextHolder } = GreenAPI();
 
   const onGetSettings = async () => {
-    try {
-      await formSettings.validateFields();
-      const settings = await getSettings(formState.idInstance, formState.apiTokenInstance);
-      setOutput(settings.data);
-    } catch (e) {
-      console.log(e);
-    }
+    await formSettings.validateFields();
+    const settings = await getSettings(formState.idInstance, formState.apiTokenInstance);
+    setOutput(settings.data);
   };
 
   const onGetStateInstance = async () => {
