@@ -113,8 +113,9 @@ const FormEl = () => {
                 rules={[{ required: true, message: 'This is required' }]}
               >
                 <Input
+                  type='number'
                   value={formState.phone}
-                  placeholder='phone'
+                  placeholder='phone (79999999999)'
                 />
               </Form.Item>
               <Form.Item
@@ -147,8 +148,9 @@ const FormEl = () => {
                 rules={[{ required: true, message: 'This is required' }]}
               >
                 <Input
+                  type='number'
                   value={formState.phone}
-                  placeholder='phone'
+                  placeholder='phone (79999999999)'
                 />
               </Form.Item>
               <Form.Item
