@@ -1,6 +1,6 @@
 import './App.css';
 
-import FormEl from '../components/Form/Form';
+import FormEl from '../pages/Form/Form';
 
 function App() {
   return <FormEl />;
