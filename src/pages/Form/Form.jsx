@@ -42,6 +42,7 @@ const FormEl = () => {
   };
 
   const onSendMessage = async () => {
+    await formSettings.validateFields();
     await formMessage.validateFields();
     const request = await sendMessage(formState.idInstance, formState.apiTokenInstance, {
       chatId: `${formState.phone}@c.us`,
@@ -51,6 +52,7 @@ const FormEl = () => {
   };
 
   const onSendFileByUrl = async () => {
+    await formSettings.validateFields();
     await formFile.validateFields();
     const request = await sendFileByUrl(formState.idInstance, formState.apiTokenInstance, {
       chatId: `${formState.phone}@c.us`,

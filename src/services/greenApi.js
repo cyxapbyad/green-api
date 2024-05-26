@@ -4,10 +4,10 @@ import { notification } from 'antd';
 export const GreenAPI = () => {
   const [api, contextHolder] = notification.useNotification();
 
-  const openNotification = (error, description, placement) => {
-    api.error({
-      message: `Error ${error}`,
-      description: description + ' (see the console for details)',
+  const openNotification = (type, message, description, placement) => {
+    api[type]({
+      message,
+      description: type === 'error' ? description + ' (see the console for details)' : description,
       placement,
     });
   };
@@ -21,7 +21,7 @@ export const GreenAPI = () => {
         return await axios.get(`${API_URL}/waInstance${idInstance}/getSettings/${apiTokenInstance}`);
       } catch (e) {
         console.log(e);
-        openNotification(e.code, e.message, 'bottomRight');
+        openNotification('error', e.code, e.message, 'bottomRight');
       }
     },
     getStateInstance: async (idInstance, apiTokenInstance) => {
@@ -29,23 +29,27 @@ export const GreenAPI = () => {
         return await axios.get(`${API_URL}/waInstance${idInstance}/getStateInstance/${apiTokenInstance}`);
       } catch (e) {
         console.log(e);
-        openNotification(e.code, e.message, 'bottomRight');
+        openNotification('error', e.code, e.message, 'bottomRight');
       }
     },
     sendMessage: async (idInstance, apiTokenInstance, body) => {
       try {
-        return await axios.post(`${API_URL}/waInstance${idInstance}/sendMessage/${apiTokenInstance}`, body);
+        const result = await axios.post(`${API_URL}/waInstance${idInstance}/sendMessage/${apiTokenInstance}`, body);
+        openNotification('success', 'Info', 'The message was sent successfully', 'bottomRight');
+        return result;
       } catch (e) {
         console.log(e);
-        openNotification(e.code, e.message, 'bottomRight');
+        openNotification('error', e.code, e.message, 'bottomRight');
       }
     },
     sendFileByUrl: async (idInstance, apiTokenInstance, body) => {
       try {
-        return await axios.post(`${API_URL}/waInstance${idInstance}/sendFileByUrl/${apiTokenInstance}`, body);
+        const result = await axios.post(`${API_URL}/waInstance${idInstance}/sendFileByUrl/${apiTokenInstance}`, body);
+        openNotification('success', 'Info', 'The message was sent successfully', 'bottomRight');
+        return result;
       } catch (e) {
         console.log(e);
-        openNotification(e.code, e.message, 'bottomRight');
+        openNotification('error', e.code, e.message, 'bottomRight');
       }
     },
   };
