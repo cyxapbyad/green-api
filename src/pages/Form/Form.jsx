@@ -62,129 +62,129 @@ const FormEl = () => {
     <>
       {contextHolder}
       <Layout>
-        <Layout>
-          <Sider
-            width={300}
-            style={{ padding: '0 10px', background: '#fff' }}
+        <Sider
+          width={300}
+          style={{ padding: '0 10px', background: '#fff' }}
+        >
+          <Form
+            layout='vertical'
+            form={formSettings}
+            name='settings'
+            initialValues={formState}
+            onValuesChange={handleFormChange}
           >
-            <Form
-              layout='vertical'
-              form={formSettings}
-              name='settings'
-              initialValues={formState}
-              onValuesChange={handleFormChange}
+            <Form.Item
+              name='idInstance'
+              rules={[{ required: true, message: 'This is required' }]}
             >
-              <Form.Item
-                name='idInstance'
-                rules={[{ required: true, message: 'This is required' }]}
+              <Input placeholder='idInstance' />
+            </Form.Item>
+            <Form.Item
+              name='apiTokenInstance'
+              rules={[{ required: true, message: 'This is required' }]}
+            >
+              <Input placeholder='apiTokenInstance' />
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type='primary'
+                onClick={onGetSettings}
               >
-                <Input placeholder='idInstance' />
-              </Form.Item>
-              <Form.Item
-                name='apiTokenInstance'
-                rules={[{ required: true, message: 'This is required' }]}
+                getSettings
+              </Button>
+              <Button
+                style={{ marginLeft: '10px' }}
+                onClick={onGetStateInstance}
               >
-                <Input placeholder='apiTokenInstance' />
-              </Form.Item>
-              <Form.Item>
-                <Button
-                  type='primary'
-                  onClick={onGetSettings}
-                >
-                  getSettings
-                </Button>
-                <Button
-                  style={{ marginLeft: '10px' }}
-                  onClick={onGetStateInstance}
-                >
-                  getStateInstance
-                </Button>
-              </Form.Item>
-            </Form>
-            <Form
-              layout='vertical'
-              form={formMessage}
+                getStateInstance
+              </Button>
+            </Form.Item>
+          </Form>
+          <Form
+            layout='vertical'
+            form={formMessage}
+            name='message'
+            initialValues={{ remember: true }}
+            onValuesChange={handleFormChange}
+          >
+            <Form.Item
+              name='phone'
+              rules={[{ required: true, message: 'This is required' }]}
+            >
+              <Input
+                type='number'
+                value={formState.phone}
+                placeholder='phone (79999999999)'
+              />
+            </Form.Item>
+            <Form.Item
               name='message'
-              initialValues={{ remember: true }}
-              onValuesChange={handleFormChange}
+              rules={[{ required: true, message: 'This is required' }]}
             >
-              <Form.Item
-                name='phone'
-                rules={[{ required: true, message: 'This is required' }]}
+              <TextArea
+                rows={7}
+                placeholder='message'
+              />
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type='primary'
+                onClick={onSendMessage}
               >
-                <Input
-                  type='number'
-                  value={formState.phone}
-                  placeholder='phone (79999999999)'
-                />
-              </Form.Item>
-              <Form.Item
-                name='message'
-                rules={[{ required: true, message: 'This is required' }]}
-              >
-                <TextArea
-                  rows={7}
-                  placeholder='message'
-                />
-              </Form.Item>
-              <Form.Item>
-                <Button
-                  type='primary'
-                  onClick={onSendMessage}
-                >
-                  sendMessage
-                </Button>
-              </Form.Item>
-            </Form>
-            <Form
-              layout='vertical'
-              form={formFile}
-              name='file'
-              initialValues={{ remember: true }}
-              onValuesChange={handleFormChange}
+                sendMessage
+              </Button>
+            </Form.Item>
+          </Form>
+          <Form
+            layout='vertical'
+            form={formFile}
+            name='file'
+            initialValues={{ remember: true }}
+            onValuesChange={handleFormChange}
+          >
+            <Form.Item
+              name='phone'
+              rules={[{ required: true, message: 'This is required' }]}
             >
-              <Form.Item
-                name='phone'
-                rules={[{ required: true, message: 'This is required' }]}
+              <Input
+                type='number'
+                value={formState.phone}
+                placeholder='phone (79999999999)'
+              />
+            </Form.Item>
+            <Form.Item
+              name='fileUrl'
+              rules={[{ required: true, message: 'This is required' }]}
+            >
+              <Input
+                onChange={(e) => {
+                  setFileName(e.target.value.substring(e.target.value.lastIndexOf('/') + 1));
+                }}
+                placeholder='fileUrl'
+              />
+            </Form.Item>
+            <Form.Item>
+              <Button
+                htmlType='submit'
+                type='primary'
+                onClick={onSendFileByUrl}
               >
-                <Input
-                  type='number'
-                  value={formState.phone}
-                  placeholder='phone (79999999999)'
-                />
-              </Form.Item>
-              <Form.Item
-                name='fileUrl'
-                rules={[{ required: true, message: 'This is required' }]}
-              >
-                <Input
-                  onChange={(e) => {
-                    setFileName(e.target.value.substring(e.target.value.lastIndexOf('/') + 1));
-                  }}
-                  placeholder='fileUrl'
-                />
-              </Form.Item>
-              <Form.Item>
-                <Button
-                  htmlType='submit'
-                  type='primary'
-                  onClick={onSendFileByUrl}
-                >
-                  sendFileByUrl
-                </Button>
-              </Form.Item>
-            </Form>
-          </Sider>
-          <Content style={{ textAlign: 'left', width: 600, padding: '0 50px' }}>
-            <Card style={{ height: '100%', backgroundColor: 'rgb(0, 43, 54)' }}>
+                sendFileByUrl
+              </Button>
+            </Form.Item>
+          </Form>
+        </Sider>
+        <Content style={{ textAlign: 'left', width: 600, padding: '0 50px' }}>
+          <Card style={{ height: '100%', backgroundColor: 'rgb(0, 43, 54)' }}>
+            {output ? (
               <JsonView
                 data={output}
                 shouldExpandNode={allExpanded}
                 style={darkStyles}
               />
-            </Card>
-          </Content>
-        </Layout>
+            ) : null}
+          </Card>
+        </Content>
       </Layout>
     </>
   );
